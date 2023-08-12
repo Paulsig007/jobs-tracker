@@ -1,33 +1,42 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
+import axios from "axios";
+import {
+  ApolloClient,
+  InMemoryCache,
+  gql,
+  createHttpLink,
+} from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
+
+import Header from "./components/Header";
+import Form from "./components/Form";
+import Table from "./components/Table";
+// import Footer from "./components/Footer";
+
+const httpLink = createHttpLink({
+  uri: "/graphql",
+});
+
+// const httpLink = createHttpLink({
+//   uri: "http://localhost:3001/graphql",
+// });
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
 
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <div className="App">
+        <Header />
+        <Form />
+        <Table />
+        {/* <Footer /> */}
+      </div>
+    </ApolloProvider>
   );
 }
 
