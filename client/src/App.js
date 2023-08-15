@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react"; // useState
 import "./App.css";
-import axios from "axios";
+// import axios from "axios";
 import {
   ApolloClient,
   InMemoryCache,
-  gql,
+  ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
-import { ApolloProvider } from "@apollo/client/react";
 
 import Header from "./components/Header";
 import Form from "./components/Form";

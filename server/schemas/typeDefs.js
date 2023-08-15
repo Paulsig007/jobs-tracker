@@ -2,18 +2,18 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type Job {
-    _id: ID
-    company: String
-    position: String
-    status: String
-    dateApplied: String
+    _id: ID!
+    company: String!
+    position: String!
+    status: String!
+    dateApplied: String!
     followUp: String
     notes: String
   }
 
   type Query {
     jobs: [Job]
-    job(_id: ID!): Job
+    job(jobId: ID!): Job
   }
 
   type Mutation {
@@ -34,7 +34,7 @@ const typeDefs = gql`
       followUp: String
       notes: String
     ): Job
-    removeJob(_id: ID!): Job
+    removeJob: Job
   }
 `;
 

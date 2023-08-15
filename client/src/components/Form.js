@@ -1,17 +1,16 @@
-import React from "react";
-// import { useState } from "react";
+import React, { useState } from "react";
 import { Modal, Box, Button, TextField, Typography } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { ADD_JOB } from "../utils/mutations";
 
 const Form = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [addJob, { error }] = useMutation(ADD_JOB);
 
   const [formState, setFormState] = React.useState({
     company: "",
     position: "",
-    link: "",
+    dateApplied: "",
     notes: "",
     status: "",
   });
@@ -19,11 +18,14 @@ const Form = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({ ...formState, [name]: value });
-    console.log(formState);
-  };
+  // const handleChange = (event) => {
+  //   // there is an event here becuase we are using the onChange event listener. This is how we get the value of the input.
+  //   const { name, value } = event.target;
+  //   // name is the name attribute of the input element. value is the value attribute of the input element.
+  //   setFormState({ ...formState, [name]: value });
+  //   // we are using a spread operator here to preserve the other key value pairs in the formState object. We are then setting the value of the input to the key of the input.
+  //   console.log(formState);
+  // };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -32,6 +34,9 @@ const Form = () => {
       const { data } = await addJob({
         variables: { ...formState },
       });
+
+      setFormState({});
+
       console.log(data);
     } catch (e) {
       console.error(e);
@@ -58,6 +63,7 @@ const Form = () => {
         <Box
           component="form"
           sx={{
+            // this is using a spread operator to preserve the other styles in the modalStyle object.
             ...modalStyle,
             "& .MuiTextField-root": { m: 1, width: "30ch" },
           }}
@@ -73,39 +79,40 @@ const Form = () => {
             label="Company"
             variant="outlined"
             name="company"
-            onChange={handleChange}
+            // onChange={handleChange}
           />
           <TextField
             id="outlined-basic"
             label="Position"
             variant="outlined"
             name="position"
-            onChange={handleChange}
+            // onChange={handleChange}
           />
           <TextField
             id="outlined-basic"
             label="dateApplied"
             variant="outlined"
             name="dateApplied"
-            onChange={handleChange}
+            // onChange={handleChange}
           />
           <TextField
             id="outlined-basic"
             label="Notes"
             variant="outlined"
             name="notes"
-            onChange={handleChange}
+            // onChange={handleChange}
           />
           <TextField
             id="outlined-basic"
             label="Status"
             variant="outlined"
             name="status"
-            onChange={handleChange}
+            // onChange={handleChange}
           />
           <Button type="submit" variant="contained">
             Submit
           </Button>
+          {error && <div>Something went wrong...</div>}
         </Box>
       </Modal>
     </div>

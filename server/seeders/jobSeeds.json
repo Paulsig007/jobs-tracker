@@ -1,0 +1,18 @@
+[
+  {
+    "company": "Paradyme Management",
+    "position": "Junior Software Developer",
+    "status": "Pending",
+    "dateApplied": "08/11/23",
+    "followUp": "8/25/23",
+    "notes": "This is a note"
+  },
+  {
+    "company": "Aegis Foundry",
+    "position": "Junior App Developer",
+    "status": "Pending",
+    "dateApplied": "08/11/23",
+    "followUp": "8/25/23",
+    "notes": "This is a note"
+  }
+]

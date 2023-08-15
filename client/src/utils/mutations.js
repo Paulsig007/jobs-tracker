@@ -5,8 +5,8 @@ export const ADD_JOB = gql`
     $company: String!
     $position: String!
     $status: String!
-    $dateApplied: Date!
-    $followUp: Date!
+    $dateApplied: String!
+    $followUp: String!
     $notes: String!
   ) {
     addJob(
@@ -32,8 +32,8 @@ export const UPDATE_JOB = gql`
     $company: String
     $position: String
     $status: String
-    $dateApplied: Date
-    $followUp: Date
+    $dateApplied: String!
+    $followUp: String
     $notes: String
   ) {
     updateJob(
